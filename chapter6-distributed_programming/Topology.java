@@ -11,8 +11,6 @@ public class Topology {
 				int neighbor = sc.nextInt();
 				neighbors.add(neighbor);
 			}
-		} catch (FileNotFoundException e) {
-			return false;
 		} catch (IOException e) {
 			return false;
 		}
