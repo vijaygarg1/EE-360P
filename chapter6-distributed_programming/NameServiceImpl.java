@@ -7,19 +7,22 @@ public class NameServiceImpl extends UnicastRemoteObject
     public NameServiceImpl() throws RemoteException {
 	table = new NameTable();
     }
-    public synchronized InetSocketAddress search(String s) throws RemoteException {
+    public InetSocketAddress search(String s) throws RemoteException {
         return table.search(s);
     }
-    public synchronized InetSocketAddress blockingFind(String s) throws RemoteException {
+    public InetSocketAddress blockingFind(String s) throws RemoteException {
         return table.blockingFind(s);
     }
-    public synchronized int insert(String s, String hostName, int portNumber)
+    public int insert(String s, String hostName, int portNumber)
             throws RemoteException {
             return table.insert(s, hostName, portNumber);
     }
     public static void main(String args[]) {
         // create security manager
-        System.setSecurityManager(new RMISecurityManager());
+	if (System.getSecurityManager() == null) {
+        	System.setSecurityManager(new SecurityManager());
+    	}
+
         try {
             NameServiceImpl obj = new NameServiceImpl();
             Naming.rebind("MyNameServer", obj);
