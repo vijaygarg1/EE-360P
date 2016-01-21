@@ -1,4 +1,8 @@
+#+Author: Eric Crosson
+#+Date: 2016-01-21
+#+Startup: content
 * EE-360P
+
 Contains the source code used in EE 360P.
 
 ** Credits
