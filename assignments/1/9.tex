@@ -1,0 +1,242 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{fixltx2e}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{hyperref}
+\tolerance=1000
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage[margin=0.75in]{geometry}
+\usepackage{enumerate}
+\usepackage{showexpl}
+\usepackage{color} %red, green, blue, yellow, cyan, magenta, black, white
+\definecolor{mygreen}{RGB}{28,172,0} % color values Red, Green, Blue
+\definecolor{mylilas}{RGB}{170,55,241}
+\newcommand{\todo}{{\LARGE \emph{\color{red}TODO}}}
+\author{Eric Crosson}
+\date{Wednesday November 18, 2015}
+\title{Probability PSet 9}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={}}
+\newcounter{problem}
+\newcounter{solution}
+\newcommand\Problem{%
+  \stepcounter{problem}%
+  \textbf{Problem \theproblem}~%
+  \setcounter{solution}{0}%
+}
+\newcommand\TheSolution{%
+  \textbf{Solution}\:\:%
+}
+\newcommand\ASolution{%
+  \stepcounter{solution}%
+  \textbf{Solution \thesolution}\:\:%
+}
+% \parindent 0in
+% \parskip 1em.
+\usepackage{beramono}
+\usepackage{listings}
+\usepackage[usenames,dvipsnames]{xcolor}
+\lstdefinelanguage{Julia}%
+  {morekeywords={abstract,break,case,catch,const,continue,do,else,elseif,%
+      end,export,false,for,function,immutable,import,importall,if,in,%
+      macro,module,otherwise,quote,return,switch,true,try,type,typealias,%
+      using,while},%
+   sensitive=true,%
+   alsoother={\$},%
+   morecomment=[l]\#,%
+   morecomment=[n]{\#=}{=\#},%
+   morestring=[s]{"}{"},%
+   morestring=[m]{'}{'},%
+}[keywords,comments,strings]%
+
+\lstset{%
+    language         = Julia,
+    basicstyle       = \ttfamily,
+    keywordstyle     = \bfseries\color{blue},
+    stringstyle      = \color{magenta},
+    commentstyle     = \color{ForestGreen},
+    showstringspaces = false,
+}
+\parindent 0in
+\parskip 1em
+\begin{document}
+% \maketitle
+\textbf{EE 351K Probability, Statistics, and Random Processes \hfill{} FALL 2015 \\
+  Instructor: Sujay Sanghavi \hfill{} Student: Eric Crosson \\
+  Homework 9 \hfill{} Due on : Thursday 11/19/15
+}
+\rule{\textwidth}{1pt}
+
+\Problem
+\begin{enumerate}
+  \item What is the maximum variance possible for a Bernoulli random variable?
+  \item What is the maximum variance possible for a binomial random variable
+    with parameter $n=1000$?
+  \item If $X$ is uniform on $[a,b]$, what is its variance?
+\end{enumerate}
+
+\TheSolution
+\begin{enumerate}
+\item
+  \LTXinputExample[language=Julia,graphic=../scripts/bernoulli-variance]{../scripts/bernoulli-variance.jl}
+  In symbols, we know a Bernoulli random variable $X$ with parameter $P$ has
+  $\sigma^2=p(1-p)$. Thus, the maximum variance occurs when
+  $\frac{d}{dp}\sigma^2(X)=0$. $\frac{d}{dp} p(1-p) = 1-2p = 0, \therefore
+  p=\frac{1}{2}$. When $p = \frac{1}{2}$, we have that
+  $\sigma^2(X)=\frac{1}{2}(1-\frac{1}{2}) = \frac{1}{4}$, so $\frac{1}{4}$ is
+  the maximum variance.
+\item
+  \LTXinputExample[language=Julia,graphic=../scripts/binomial-variance]{../scripts/binomial-variance.jl}
+  We have that a Binomial random variable, $X$, with parameters $n$ (fixed) and
+  $p$ (allowed to vary) has variance $\sigma^2(X) = np(1 - p)$. Again, the maximum
+  variance is attained where $\frac{d}{dp}\sigma^2(X)=0$:
+  \begin{align}
+    \frac{d}{dp}\sigma^2(X)=\frac{d}{dp}np(1-p)=n(1-2p)&=0, \\
+    \therefore p &= \frac{1}{2}
+  \end{align}
+  When $p=\frac{1}{2}$, we have that $\sigma^2(X)=\frac{n}{4} = 250$, which is the
+  maximum attainable variance.
+\item
+  \LTXinputExample[language=Julia,graphic=../scripts/uniform-variance]{../scripts/uniform-variance.jl}
+  A variable $X$ uniform across $[a,b]$ will have $f_X(x)=\frac{1}{b-a} \text{
+    for } x \in [a,b]$ and zero otherwise. This yields
+  \begin{align}
+    E[X] = \int_{-\infty}^\infty xf_X(x)dx = \int_a^b \frac{x}{b-a}dx = \frac{b^2-a^2}{2(b-a)} &= \frac{(b-a)(b+a)}{2(b-a)} \\
+&= \frac{a+b}{2} \\
+E[X^2] = \int_{-\infty}^\infty x^2f_X(x)dx = \int_a^b\frac{x^2}{b-a}dx &= \frac{b^3-a^3}{3(b-1)} \\
+    &= \frac{(a^2+ab+b^2)(b-a)}{3(b-a)} \\
+    &= \frac{1}{3}(a^2+ab+b^2)
+  \end{align}
+  Thus,
+  \begin{align}
+    \sigma^2(X) = E[X^2]-(E[X])^2 &= \frac{1}{3}(a^2+ab+b^2) - \frac{(a+b)^2}{4} \\
+    &= \frac{(b-a)^2}{12}
+  \end{align}
+\end{enumerate}
+
+  \Problem
+  On average, it takes 1 hour to catch a fish.
+  \begin{enumerate}
+  \item What is (an upper bound on) the probability that it will take 3 hours to
+    catch a fish?
+  \item Landis only has 2 hours to spend fishing. What is (an upper bound on)
+    the probability he will go home fish-less?
+  \end{enumerate}
+
+  \TheSolution
+  Let $X$ be time (in hours) it takes to catch a fish. We have that $X>0$. Thus,
+  $P(X<0)=0$ and the Markov inequality applies.
+  \begin{enumerate}
+  \item $P(X\geq 3)\leq \frac{1}{3}$, so that $\frac{1}{3}$ is an upper bound to
+    the probability that it will take more than 3 hours to catch a fish.
+  \item In order for Landis to catch a fish, $X > 2$ -> $P(\text{no fish
+      caught}) = P(X>2) = P(X \geq 2)$. From the Markov inequality, $P(X \geq 2)
+    \leq \frac{1}{2}$. Therefore, $\frac{1}{2}$ is an upper bound on the
+    probability that unlucky Landis will not catch a fish.
+  \end{enumerate}
+
+  \newpage
+  \Problem
+  An election between Alice and Bob is over and the votes have been cast. If all
+  the votes were counted, it would show that Alice has won the election. However,
+  the election officer is lazy, and decides he is just going to count 1000 random
+  votes. He does so, and finds 600 for Bob and 400 for Alice. He declares Bob has
+  won the election. What is (an upper bound on) such an event occuring? (Assume,
+  that the election has an infinite number of people.)
+
+  \TheSolution
+
+  Let the $i$-th vote, $X_i$ be 1 if the vote is for Bob, and 0 if the vot is for
+  Alice. Then $X_i$ is a bernoulli random variable with parameter $p$ (the unknown
+  fraction of people in the polled area who voted for Bob). Out of the 1000 votes
+  counted, we would have $$S=\sum_{i=1}^{1000}X_i$$ votes for Bob. We then have
+  that $E[S] = 1000p$. Now, we find the upper bound for the probability of the
+  event that 600 votes were for Bob, given the parameter $p$ as follows:
+
+  \begin{align}
+    P(S=600|p)\leq P(S\geq600|p) &= P(|S-1000p| \geq 600 - 1000p) \\
+                                 &= \leq \frac{\sigma^s(S)}{(600-1000p)^2} \text{ by Chebyshev's inequality}
+  \end{align}
+
+  We have $\sigma^2(S)=1000(1-p)p$ as a property of Bernoulli random
+  variables. Therefore,
+
+  \begin{align}
+    P(S=600|p)\leq \frac{1000(1-p)p}{(600-1000p)^2} = \frac{p(1-p)}{1000\left(\frac{3}{5}-p^2\right)}
+  \end{align}
+
+  Now we must maximize the upper bound over $p \in [0, 0.5]$. We only consider
+  values of $p$ in said range because if $p>0.5$ Bob would have won the vote,
+  which contradicts the given problem statement. To find the maximum, we plot
+  the upper limit, $\frac{p(1-p)}{1000(\frac{3}{5}-p)^2}$ for $p \in [0,
+  0.5]$. This is easier than differentiating the expression. We see from the
+  below plot that the upper limit of $P(S=600|p)$ is maximized at
+  $p=\frac{1}{2}$. Therefore, we find that the upper limit for the event of 600
+  votes for Bob given that Alice won the vote is
+
+  \begin{equation}
+    \frac{p(1-p)}{1000\left(\frac{3}{5}-p\right)^2}\vert_{p=\frac{1}{2}} = \frac{\frac{1}{4}}{1000\left(\frac{3}{5}-\left(\frac{1}{2}\right)^2\right)} = \frac{1}{4}\cdot\frac{1}{10} = \frac{1}{40}
+  \end{equation}
+
+  \LTXinputExample[language=Julia,graphic=../scripts/vote-plot]{../scripts/vote-plot.jl}
+
+  \Problem
+  Let $X_1, X_2, \cdots, X_n$ be i.i.d random variables with $E[X]=0$ and
+  $\sigma^2(X)=3$. let $Y_1, Y_2, \cdots, Y_n$ be i.i.d random variables with %
+  $E[Y]=1$ and $\sigma^2(Y)=2$. The $X$'s and $Y$'s are independent of each other.
+
+  \begin{enumerate}
+  \item Let $Z_i = X_iY_i$ for $i=1,2,\cdots$ What is $\sigma^2(Z)$?
+  \item Constant $c$ is defined as $$c=\lim_{n\to\infty}\frac{1}{n}\sum_{i=1}^nZ_i$$ What is the
+    value of $c$?
+  \end{enumerate}
+
+  \TheSolution
+  \begin{enumerate}
+    \item
+      \begin{align}
+        \sigma^2(XY)&=E(X^2Y^2)-E(XY)^2=\sigma^2(X)\sigma^2(Y)+\sigma^2(X)E(Y)^2+\sigma^2(Y)E(X)^2 \\
+        &= 3(2)+3(1)^2+2(0)^2 = 9
+      \end{align}
+  \item $c = 0$.
+  \end{enumerate}
+
+  \Problem
+  Let $X_i, i=1,2,\cdots,n$ be $n$ i.i.d random variables, with
+  $M_x(\theta)=E[e^{\theta{}X}]$.
+  \begin{enumerate}
+  \item Show that for any $\theta \geq 0$,
+    \begin{equation*}
+      Pr(e^{\theta{}X} \geq e^{\theta{}a}) \leq \frac{E[e^{\theta{}X}]}{e^{\theta{}a}}.
+    \end{equation*}
+  \item Argue that $Pr(X\geq{}a) = Pr(e^{\theta{}X} \geq e^{\theta{}a})$ and
+    that, therefore, $Pr(X\geq a) \leq e^{-[\theta{}a-\log{M_x(\theta)}]}$
+  \end{enumerate}
+
+  \TheSolution
+  \begin{enumerate}
+  \item
+    \begin{align}
+      E[e^{\theta{}X}] &= \int_0^\infty xf_e^{\theta{}X}(x)dx \geq \int_{e^{\theta{}a}}^\infty xf_e^{\theta{}X}(x)dx \geq {e^{\theta{}a}} \int_{e^{\theta{}a}}^\infty f_X(x)dx = {e^{\theta{}a}}P(e^{\theta{}X}\geq {e^{\theta{}a}}) \\
+      \frac{E[e^{\theta{}X}]}{{e^{\theta{}a}}} &\geq Pr(e^{\theta{}X} \geq {e^{\theta{}a}})
+    \end{align}
+  \end{enumerate}
+
+\end{document}
