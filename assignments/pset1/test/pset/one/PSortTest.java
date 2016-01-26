@@ -42,8 +42,8 @@ public class PSortTest {
         int[] B = new int[A.length];
         System.arraycopy(A, 0, B, 0, A.length);
 
-        System.out.println("Verify Parallel Sort for array: ");
-        printArray(A);
+        /* System.out.println("Verify Parallel Sort for array: "); */
+        /* printArray(A); */
 
         Arrays.sort(A);
         PSort.parallelSort(B, 0, B.length);
@@ -62,10 +62,10 @@ public class PSortTest {
             }
         }
 
-        if (isSuccess) {
-            System.out.println(
-                "Great, your sorting algorithm works for this test case");
-        }
+        /* if (isSuccess) { */
+        /*     System.out.println( */
+        /*         "Great, your sorting algorithm works for this test case"); */
+        /* } */
         System.out.println(
             "=========================================================");
     }
