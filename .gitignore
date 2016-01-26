@@ -7,6 +7,9 @@
 *.pdf
 *.class
 *.synctex.gz
+*.settings/
+*.classpath
+*.project
 /assignments/1/build/1.tex
 /assignments/1/build/CMakeCache.txt
 /assignments/1/build/CMakeFiles/3.4.1/CMakeCCompiler.cmake
