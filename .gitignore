@@ -10,6 +10,7 @@
 *.settings/
 *.classpath
 *.project
+/assignments/pset1/reports
 /assignments/1/build/1.tex
 /assignments/1/build/CMakeCache.txt
 /assignments/1/build/CMakeFiles/3.4.1/CMakeCCompiler.cmake

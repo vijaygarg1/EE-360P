@@ -1,9 +1,13 @@
+package pset.one;
+
 /**
  * @author      Eric Crosson <eric.s.crosson@utexas.edu>
  * @author      William "Stormy" Mauldin <stormymauldin@utexas.edu>
  * @version     0.1
  * @since       2016-01-26
  */
+
+import java.util.Arrays;
 
 public class PSort implements Runnable {
 
@@ -16,7 +20,7 @@ public class PSort implements Runnable {
      */
     public static void parallelSort(int[] A, int begin, int end) {
         int pivot = begin;
-		
+        Arrays.sort(A);
     }
 
     @Override
