@@ -1,0 +1,166 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{fixltx2e}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{hyperref}
+\tolerance=1000
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage[margin=0.75in]{geometry}
+\usepackage{enumerate}
+\usepackage{showexpl}
+\usepackage{color} %red, green, blue, yellow, cyan, magenta, black, white
+\definecolor{mygreen}{RGB}{28,172,0} % color values Red, Green, Blue
+\definecolor{mylilas}{RGB}{170,55,241}
+\newcommand{\todo}{{\LARGE \emph{\color{red}TODO}}}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={}}
+\newcounter{problem}
+\newcounter{solution}
+\usepackage{beramono}
+\usepackage{listings}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage[T1]{fontenc}
+\usepackage{inconsolata}
+\usepackage{color}
+\definecolor{pblue}{rgb}{0.13,0.13,1}
+\definecolor{pgreen}{rgb}{0,0.5,0}
+\definecolor{pred}{rgb}{0.9,0,0}
+\definecolor{pgrey}{rgb}{0.46,0.45,0.48}
+\lstset{language=Java,
+  showspaces=false,
+  showtabs=false,
+  breaklines=true,
+  showstringspaces=false,
+  breakatwhitespace=true,
+  commentstyle=\color{pgreen},
+  keywordstyle=\color{pblue},
+  stringstyle=\color{pred},
+  basicstyle=\ttfamily,
+  moredelim=[il][\textcolor{pgrey}]{$$},
+  moredelim=[is][\textcolor{pgrey}]{\%\%}{\%\%}
+}
+% \parindent 0in
+% \parskip 1em.
+\begin{document}
+\title{EE 360P:\@Concurrent and Distributed Systems \\ Assignment 1}
+\author{Student: Eric Crosson (email: eric.s.crosson@utexas.edu)\\
+  Student: William ``Stormy'' Mauldin (email: stormymauldin@utexas.edu)}
+\date{Thursday January 21, 2016}
+\maketitle
+
+This homework contains a programming part (Q1-Q2) and a theory part (Q3-Q6). The
+theory part should be written or typed on a paper and submitted at the beginning
+of the class. The source code (Java files) of the programming part must be
+uploaded through the canvas before the end of the due date (i.e., 11:59pm in
+February 2\textsuperscript{nd}). The assignment should be done in teams of two. You
+should use the templates downloaded from the course github
+(https://github.com/vijaygarg1/EE-360P.git). You should not change the file
+names and function signatures. In addition, you should not use package for
+encapsulation. Note that, we provide some test cases for your convenience in
+SimpleTest class. You do not need to modify the class. Please zip and name the
+source code as [EID1 EID2].zip. \\
+
+\begin{enumerate}
+\item \textbf{(20 points)} Write a Java class \texttt{PSort} that allows
+  parallel sorting of an array of integers. It provides the following
+  \texttt{static} method: \\
+
+  \begin{lstlisting}[language=Java]
+  public class PSort {
+    public static void parallelSort(int[] A, int begin, int end) {
+    // your implementation goes here.
+    }
+  }
+  \end{lstlisting}
+
+  Use QuickSort algorithm for sorting and Runnable interface for your
+  implementation. In quick sort, the input array is divided into two sub-arrays,
+  and then the two sub-arrays are sorted recursively using the same
+  algorithm. In your implementation, you should create two new threads for
+  sorting the divided
+  sub-arrays. \\
+
+  The input array A is also the output array, which means your should put the
+  sorted data back in A.  The range to be sorted extends from index begin,
+  inclusive, to index end, exclusive. In other words, the range to be sorted is
+  empty when begin == end. To simplify the problem, you can assume that the size
+  of array A does not exceed 10,000.
+
+\item \textbf{(20 points)} Write a Java class that allows parallel search in an
+  array of integers. It provides the following static method:
+
+  \begin{lstlisting}[language=Java]
+  public class PSearch {
+    public static int parallelSearch(int x, int[] A, int numThreads) {
+    // your implementation goes here.
+    }
+  }
+  \end{lstlisting}
+
+  This method creates as many threads as specified by \texttt{numThreads},
+  divides the array A into that many parts, and gives each thread a part of the
+  array to search for x sequentially. If any thread finds \texttt{x}, then it
+  returns an index \texttt{i} such that \texttt{A[i] = x}. Otherwise, the method
+  returns -1. Use \emph{Callable} interface for your implementation. Note that,
+  you can assume that every element of the array is unique.
+
+\item \textbf{(15 points)} Show that any of the following modifications to
+  Peterson’s algorithm makes it incorrect:
+  \begin{enumerate}[a)]
+  \item A process in Peterson’s algorithm sets the \emph{turn} variable to
+    itself instead of setting it to the other process.
+  \item A process sets the \emph{turn} variable before setting the \emph{wantCS}
+    variable.
+  \end{enumerate}
+
+\item \textbf{(15 points)} Show that the bakery algorithm does not work in the
+  absence of \emph{choosing} variables.
+\item \textbf{(15 points)} Prove that Peterson's algorithm is free from starvation.
+\item \textbf{(15 points)} Peterson's algorithm uses a multi-write variable
+  \texttt{turn}. Modify the algorithm to use two variables \texttt{turn0} and
+  \texttt{turn1} instead of \texttt{turn} such that \emph{P\textsubscript{0}}
+  does not write to \texttt{turn1} and \emph{P\textsubscript{1}} does not write
+  to \texttt{turn0}.
+\item \textbf{(0 points)} You are one of the recently arrested prisoners. The
+  warden, a deranged computer scientist, makes the following announcement:
+  \begin{itemize}
+  \item All prisoners may meet together today and plan a strategy, but after
+    today you will be in isolated cells and have no communication with one
+    another.
+  \item I have setup a ``switch room'' which contains a light switch, which is
+    either on or off. The switch is not connected to anything.
+  \item Every now and then, I will select one prisoner at random to enter the
+    ``switch room''. This prisoner may throw the switch (from on to off, or
+    vice-versa), or may leave the switch unchanged. Nobody else will ever enter
+    this room while the prisoner is in the room.
+  \item Each prisoner will visit the ``switch room'' arbitrarily often. More
+    precisely, for any $N$, eventually each of you will visit the ``switch
+    room'' at least $N$ times.
+  \item At any time, any of you may declare: ``we have all visited the 'switch
+    room' at least once.''  If the claim is correct, I will set you free. If the
+    claim is incorrect, I will feed all of you to the crocodiles. Choose wisely!
+  \end{itemize}
+
+  Devise a winning strategy when you know that the initial state of the switch
+  is off. (Hint: not all prisoners need to do the same thing.)
+
+\end{enumerate}
+
+\end{document}

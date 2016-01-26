@@ -1,0 +1,100 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{fixltx2e}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{hyperref}
+\tolerance=1000
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage[margin=0.75in]{geometry}
+\usepackage{enumerate}
+\usepackage{showexpl}
+\usepackage{color} %red, green, blue, yellow, cyan, magenta, black, white
+\definecolor{mygreen}{RGB}{28,172,0} % color values Red, Green, Blue
+\definecolor{mylilas}{RGB}{170,55,241}
+\newcommand{\todo}{{\LARGE \emph{\color{red}TODO}}}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={}}
+\newcounter{problem}
+\newcounter{solution}
+\usepackage{beramono}
+\usepackage{listings}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage[T1]{fontenc}
+\usepackage{inconsolata}
+\usepackage{color}
+\definecolor{pblue}{rgb}{0.13,0.13,1}
+\definecolor{pgreen}{rgb}{0,0.5,0}
+\definecolor{pred}{rgb}{0.9,0,0}
+\definecolor{pgrey}{rgb}{0.46,0.45,0.48}
+\lstset{language=Java,
+  showspaces=false,
+  showtabs=false,
+  breaklines=true,
+  showstringspaces=false,
+  breakatwhitespace=true,
+  commentstyle=\color{pgreen},
+  keywordstyle=\color{pblue},
+  stringstyle=\color{pred},
+  basicstyle=\ttfamily,
+  moredelim=[il][\textcolor{pgrey}]{$$},
+  moredelim=[is][\textcolor{pgrey}]{\%\%}{\%\%}
+}
+% \parindent 0in
+% \parskip 1em.
+\begin{document}
+\title{EE 360P:\@Concurrent and Distributed Systems \\ Assignment \todo}
+\author{Student: Eric Crosson (email: eric.s.crosson@utexas.edu)\\
+  Student: William ``Stormy'' Mauldin (email: stormymauldin@utexas.edu)}
+\date{Monday, January 25, 2016}
+\maketitle
+
+\begin{enumerate}
+\item PSort
+
+\begin{itemize}
+\item Set pivot = begin
+\item While begin < end
+\begin{itemize}
+\item Increment begin until A[begin] > A[pivot]
+\item Decrement tempEnd until A[end] < A[pivot]
+\item If begin < end, swap A[begin] and A[end]
+\end{itemize}
+\item Swap A[pivot] and A[end]
+\item Split into two threads, one for each side of pivot's new location
+\item Recursively call PSort for each thread
+\end{itemize}
+
+\item PSearch
+\begin{itemize}
+\item Divide size of array by number of threads
+\item Create indices at division points
+\item Create threads, assign beginning and end indices
+\item For each thread
+\begin{itemize}
+\item Sequentially search for x
+\begin{itemize}
+\item If found, return index of x
+\item Otherwise, return -1
+\end{itemize}
+\end{itemize}
+\end{itemize}
+\end{enumerate}
+
+\end{document}
