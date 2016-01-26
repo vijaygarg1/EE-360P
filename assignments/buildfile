@@ -1,0 +1,21 @@
+VERSION_NUMBER = '0.1'
+JAVA_TARGET = '1.8'
+
+define 'assignments' do
+
+  #--- Project Group settings
+  project.version = VERSION_NUMBER
+  project.group = 'assignments'
+  manifest['Copyright'] = 'Stormosson (C) 2016'
+
+  #--- Build settings
+  compile.options.target = JAVA_TARGET
+
+  #--- Project settings
+  define 'pset1' do
+    compile.from(_(:src))
+  end
+
+  # task :default => [:build, :doc]
+
+end
