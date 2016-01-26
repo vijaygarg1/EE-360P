@@ -1,8 +1,18 @@
 #-*- mode: ruby -*-
+# Written by Eric Crosson
+# 2016-01-25
+
 VERSION_NUMBER = '0.1'
 JAVA_TARGET = '1.8'
 
-define 'assignments' do
+repositories.remote << "http://repo2.maven.org/maven2/"
+
+#--- Conform to course directory structure
+ass_layout = Layout.new
+ass_layout[:source, :main, :java] = 'src'
+ass_layout[:source, :test, :java] = 'test'
+
+define 'assignments', :layout => ass_layout do
 
   #--- Project Group settings
   project.version = VERSION_NUMBER
@@ -12,10 +22,6 @@ define 'assignments' do
   compile.options.target = JAVA_TARGET
 
   #--- Project settings
-  define 'pset1' do
-    compile.from(_(:src))
-  end
-
-  # task :default => [:build, :doc]
+  define 'pset1'
 
 end
