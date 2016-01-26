@@ -16,10 +16,11 @@ import pset1.PSort;
  * @since       2016-01-26
  */
 
-// TODO: Document
-
 public class PSortTest {
 
+    /**
+     * Test parallelSort under a variety of Arrays.
+     */
     @Test
     public void testParallelSort() {
         int[] A1 = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
@@ -32,6 +33,11 @@ public class PSortTest {
         verifyParallelSort(A3);
     }
 
+    /**
+     * Verify parallelSort's ability to sorty array A.
+     *
+     * @param  A The test array to verify
+     */
     void verifyParallelSort(int[] A) {
         int[] B = new int[A.length];
         System.arraycopy(A, 0, B, 0, A.length);
@@ -64,6 +70,11 @@ public class PSortTest {
             "=========================================================");
     }
 
+    /**
+     * Print int array A to System.out.
+     *
+     * @param  A The int array to display
+     */
     void printArray(int[] A) {
         for (int i = 0; i < A.length; i++) {
             System.out.print(A[i] + (i != A.length - 1) ? " " : "");
