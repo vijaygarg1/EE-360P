@@ -14,7 +14,7 @@ import pset1.PSort;
  * @since       2016-01-26
  */
 
-public class TestPSort {
+public class PSortTest {
 
     @Test
     public void testParallelSort() {
