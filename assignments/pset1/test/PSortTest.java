@@ -16,6 +16,8 @@ import pset1.PSort;
  * @since       2016-01-26
  */
 
+// TODO: Document
+
 public class PSortTest {
 
     @Test
@@ -64,11 +66,7 @@ public class PSortTest {
 
     void printArray(int[] A) {
         for (int i = 0; i < A.length; i++) {
-            if (i != A.length - 1) {
-                System.out.print(A[i] + " ");
-            } else {
-                System.out.print(A[i]);
-            }
+            System.out.print(A[i] + (i != A.length - 1) ? " " : "");
         }
         System.out.println();
     }
