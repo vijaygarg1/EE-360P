@@ -1,6 +1,5 @@
 public class Server {
   public static void main (String[] args) {
-    int N;
     int tcpPort;
     int udpPort;
     if (args.length != 3) {
