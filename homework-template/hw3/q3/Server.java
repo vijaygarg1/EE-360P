@@ -11,10 +11,9 @@ public class Server {
 
       System.exit(-1);
     }
-    N = Integer.parseInt(args[0]);
-    tcpPort = Integer.parseInt(args[1]);
-    udpPort = Integer.parseInt(args[2]);
-    String fileName = args[3];
+    tcpPort = Integer.parseInt(args[0]);
+    udpPort = Integer.parseInt(args[1]);
+    String fileName = args[2];
 
     // parse the inventory file
 
