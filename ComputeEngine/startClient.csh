@@ -1,0 +1,1 @@
+java -cp /Users/vijaygarg/EE-360P/ComputeEngine:/Users/vijaygarg/Sites/classes/compute.jar -Djava.rmi.server.codebase=http://localhost/~vijaygarg/classes/ -Djava.security.policy=client.policy client.ComputePi localhost 45

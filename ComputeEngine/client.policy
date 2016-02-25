@@ -1,0 +1,3 @@
+grant codeBase "file:/Users/vijaygarg/EE-360P/ComputeEngine" {
+    permission java.security.AllPermission;
+};

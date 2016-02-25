@@ -1,0 +1,1 @@
+java -cp /Users/vijaygarg/EE-360P/ComputeEngine:/Users/vijaygarg/Sites/classes/compute.jar -Djava.rmi.server.codebase=http://localhost/~vijaygarg/classes/compute.jar -Djava.rmi.server.hostname=localhost -Djava.security.policy=server.policy engine.ComputeEngine
