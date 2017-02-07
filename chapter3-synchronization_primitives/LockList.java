@@ -25,7 +25,7 @@ public class LockList { // adapted from Herlihy's implementation
       }
   }
 
-  public boolean remove(Object item) {
+  public synchronized boolean remove(Object item) {
     Node pred, curr;
     int key = item.hashCode();
       pred = this.head;
