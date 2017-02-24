@@ -12,12 +12,16 @@ public class CentMutex extends dist.Process implements Lock {
         haveToken = (myId == leader);
     }
     public synchronized void requestCS() {
-        sendMsg(leader, "request");
-        while (!haveToken) myWait();
+	if (myId != leader){
+           sendMsg(leader, "request");
+           while (!haveToken) myWait();
+        }
     }
     public synchronized void releaseCS() {
-        sendMsg(leader, "release");
-        haveToken = false;
+	if (myId != leader){
+           sendMsg(leader, "release");
+           haveToken = false;
+        }
     }
     public synchronized void handleMsg(Msg m, int src, String tag) {
         if (tag.equals("request")) {
@@ -33,7 +37,9 @@ public class CentMutex extends dist.Process implements Lock {
                 sendMsg(pid, "okay");
             } else
                 haveToken = true;
-        } else if (tag.equals("okay")) 
+        } else if (tag.equals("okay")) {
             haveToken = true;
+	    notifyAll();
+	}
     }
 }
