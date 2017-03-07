@@ -2,7 +2,7 @@ package mutex;
 import java.util.*;
 import dist.*;
 
-public class CentMutex extends dist.Process implements Lock {
+public class CentMutex extends MyProcess implements Lock {
     // assumes that P_0 coordinates and does not request locks.
     boolean haveToken;
     final int leader = 0;

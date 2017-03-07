@@ -1,6 +1,6 @@
 package mutex;
 import dist.*; import clocks.*; import java.util.*;
-public class LamportMutex extends dist.Process implements Lock {
+public class LamportMutex extends dist.MyProcess implements Lock {
 	public LamportClock c;
 	public int numAcks;
 	public Queue<Timestamp> q; // request queue

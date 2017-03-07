@@ -1,19 +1,21 @@
 package dist;
 import java.util.*; import java.io.*;
-public class Process implements MsgHandler {
+public class MyProcess implements MsgHandler {
 	public int myId;	
 	public int n; // number of neighbors including myself
+	public int N; // total number of nodes in the system
 	MsgHandler app = null;// upper layer
 	MsgHandler comm = null;// lower layer
 	public boolean debug = true;
 	public boolean appFinished = false;
 	//public Properties prop = new Properties();
 	public List<Integer> neighbors = new ArrayList<Integer>();	
-	public Process(MsgHandler initComm)  {
+	public MyProcess(MsgHandler initComm)  {
 		comm = initComm;
 		myId = comm.getMyId();	       
 		neighbors = comm.getNeighbors();
 		n = neighbors.size() + 1;
+		N = n; // total number as known to me
 		//prop = comm.getProp();
 	}
 	public void init(MsgHandler app){

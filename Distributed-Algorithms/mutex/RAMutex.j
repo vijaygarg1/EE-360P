@@ -1,22 +1,22 @@
 package mutex;
+import java.util.*;
 import dist.*;
 import clocks.*;
-import java.util.*;
-public class RAMutex extends dist.MyProcess implements Lock {  
+public class RAMutex extends dist.Process implements Lock {  
     public int myts;
     public LamportClock c = new LamportClock();
     LinkedList<Integer> pendingQ = new LinkedList<Integer>();
     public int numOkay = 0;
-    public RAMutex(MsgHandler initComm) {
+    public RAMutex(Linker initComm) {
         super(initComm);
         myts = Integer.MAX_VALUE;
     }
     public synchronized void requestCS() {
         c.tick();
         myts = c.getValue();
-        sendMsg(neighbors,"request", myts);
+        broadcastMsg("request", myts);
         numOkay = 0;
-        while (numOkay < n-1)
+        while (numOkay < N-1)
             myWait(); 
     }
     public synchronized void releaseCS() {
@@ -25,7 +25,7 @@ public class RAMutex extends dist.MyProcess implements Lock {
             sendMsg(pendingQ.remove(), "okay", c.getValue());
     }
     public Boolean okayCS() {
-        if(myts == Integer.MAX_VALUE || numOkay <n-1) return false;
+        if(myts == Integer.MAX_VALUE || numOkay <N-1) return false;
         return true;
     }
     public synchronized void handleMsg(Msg m, int src, String tag) {

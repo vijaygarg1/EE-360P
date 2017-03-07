@@ -1,6 +1,6 @@
 package mutex;
 import dist.*;
-public class DinMutex extends dist.Process implements Lock {
+public class DinMutex extends dist.MyProcess implements Lock {
 	private static final int thinking = 0, hungry = 1, eating = 2;
 	Boolean fork[] = null,  dirty[] = null, request[] = null;
 	public int myState = thinking;
