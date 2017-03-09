@@ -3,7 +3,7 @@ import dist.*;
 public class DinMutex extends dist.MyProcess implements Lock {
 	private static final int thinking = 0, hungry = 1, eating = 2;
 	Boolean fork[] = null,  dirty[] = null, request[] = null;
-	public int myState = thinking;
+	int myState = thinking;
 	int n = neighbors.size();
 	public DinMutex(MsgHandler initComm) {
 		super(initComm);
@@ -32,9 +32,9 @@ public class DinMutex extends dist.MyProcess implements Lock {
 		for (int i=0; i < n; i++){
 			dirty[i] = true;
 			if (request[i]) {
-					sendMsg(neighbors.get(i), "Fork"); 
-					fork[i]=false;
-				}
+				sendMsg(neighbors.get(i), "Fork"); 
+				fork[i]=false;
+			}
 		}
 	}
 	boolean haveForks() {

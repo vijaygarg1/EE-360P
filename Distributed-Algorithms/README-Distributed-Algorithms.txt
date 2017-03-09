@@ -3,6 +3,7 @@ name:		NameServer
 dist:		Basic Routines for sending and receiving messages
 clocks:		Clock Algorithms
 mutex:		Mutex Algorithms
+snapshot:	Snapshot Algorithms
 
 
 All algorithms depend upon the NameServer to be running.
