@@ -38,5 +38,6 @@ public class RAMutex extends dist.MyProcess implements Lock {
                 pendingQ.add(src);
         } else if (tag.equals("okay")) 
             numOkay++;
+        notifyAll();
     }
 }

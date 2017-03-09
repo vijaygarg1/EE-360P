@@ -1,13 +1,16 @@
 package mutex;
 import dist.*;
-public class CircToken extends dist.MyProcess implements Lock {
+public class CircToken extends MyProcess implements Lock {
     boolean haveToken;
     boolean wantCS = false;
-    public CircToken(Linker initComm, int coordinator) {
+    final int leader = 0;
+    public CircToken(MsgHandler initComm) {
         super(initComm);
-        haveToken = (myId == coordinator);
+        haveToken = (myId == leader);
+       // if (haveToken) sendToken();
     }
-    public synchronized void initiate() {
+    public void init(MsgHandler app) {
+    	super.init(app);
         if (haveToken) sendToken();
     }
     public synchronized void requestCS() {
@@ -36,6 +39,7 @@ public class CircToken extends dist.MyProcess implements Lock {
                 Util.mySleep(1000);
                 sendToken();
             }
+            notifyAll();
         }
     }
 }

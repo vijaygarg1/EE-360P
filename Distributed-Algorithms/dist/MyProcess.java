@@ -4,7 +4,7 @@ public class MyProcess implements MsgHandler {
 	public int myId;	
 	public int n; // number of neighbors including myself
 	public int N; // total number of nodes in the system
-	MsgHandler app = null;// upper layer
+	public MsgHandler app = null;// upper layer
 	MsgHandler comm = null;// lower layer
 	public boolean debug = true;
 	public boolean appFinished = false;
@@ -23,11 +23,11 @@ public class MyProcess implements MsgHandler {
 		comm.init(this);    	
 	}
 	public synchronized void handleMsg(Msg m, int src, String tag){}
-	public synchronized void executeMsg(Msg m) {	
-		handleMsg(m, m.src, m.tag);
-		notifyAll();
-		if (app != null) app.executeMsg(m);		
-	}
+//	public synchronized void executeMsg(Msg m) {	
+//		handleMsg(m, m.src, m.tag);
+//		notifyAll();
+//		//if (app != null) app.executeMsg(m);		
+//	}
 	public void sendMsg(int destId, Object ... objects) {
 		comm.sendMsg(destId, objects);		
 	        //if (debug) System.out.println("Process "+ myId + " sends " + objects + " to " + destId);

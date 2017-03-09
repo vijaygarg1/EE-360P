@@ -4,11 +4,12 @@ public class DinMutex extends dist.MyProcess implements Lock {
 	private static final int thinking = 0, hungry = 1, eating = 2;
 	Boolean fork[] = null,  dirty[] = null, request[] = null;
 	public int myState = thinking;
+	int n = neighbors.size();
 	public DinMutex(MsgHandler initComm) {
 		super(initComm);
 		fork = new Boolean[n]; dirty = new Boolean[n];
 		request = new Boolean[n];
-		for (int i=0; i < n-1; i++) { //only n-1 neighbors
+		for (int i=0; i < n; i++) { 
 			if (myId > neighbors.get(i)) {
 				fork[i] = false; request[i] = true;
 			} else { fork[i] = true; request[i] = false; }
@@ -19,7 +20,7 @@ public class DinMutex extends dist.MyProcess implements Lock {
 		myState = hungry;
 		if (haveForks()) myState = eating;
 		else
-			for (int i=0; i < n-1; i++)
+			for (int i=0; i < n; i++)
 				if (request[i] && !fork[i]) {
 					sendMsg(neighbors.get(i), "Request"); 
 					request[i]=false;
@@ -28,7 +29,7 @@ public class DinMutex extends dist.MyProcess implements Lock {
 	}
 	public synchronized void releaseCS() {
 		myState = thinking;
-		for (int i=0; i < n-1; i++){
+		for (int i=0; i < n; i++){
 			dirty[i] = true;
 			if (request[i]) {
 					sendMsg(neighbors.get(i), "Fork"); 
@@ -37,7 +38,7 @@ public class DinMutex extends dist.MyProcess implements Lock {
 		}
 	}
 	boolean haveForks() {
-		for (int i=0; i < n-1; i++)
+		for (int i=0; i < n; i++)
 			if (!fork[i]) return false;
 		return true;
 	}
@@ -59,5 +60,6 @@ public class DinMutex extends dist.MyProcess implements Lock {
 			if (haveForks()) 
 				myState = eating; 
 		}
+		notifyAll();
 	}
 }

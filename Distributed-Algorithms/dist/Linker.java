@@ -56,12 +56,14 @@ public class Linker implements MsgHandler {
 		}
 
 	}
-	public synchronized void handleMsg(Msg m, int src, String tag) { }
-	public synchronized void executeMsg(Msg m) {	
-		handleMsg(m, m.src, m.tag);
-		notifyAll();
-		if (app != null) app.executeMsg(m);		
+	public synchronized void handleMsg(Msg m, int src, String tag) { if (app != null) app.handleMsg(m, m.src, m.tag);
 	}
+//	public synchronized void executeMsg(Msg m) {	
+//		if (m != null)
+//		   handleMsg(m, m.src, m.tag);
+//		notifyAll();
+//		if (app != null) app.executeMsg(m);		
+//	}
 	public synchronized int getMyId() { return myId; }
 	//public Properties getProp() { return prop;}
 	public List<Integer> getNeighbors() { return neighbors; }

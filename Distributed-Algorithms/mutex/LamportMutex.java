@@ -1,6 +1,6 @@
 package mutex;
 import dist.*; import clocks.*; import java.util.*;
-public class LamportMutex extends dist.MyProcess implements Lock {
+public class LamportMutex extends MyProcess implements Lock {
 	public LamportClock c;
 	public int numAcks;
 	public Queue<Timestamp> q; // request queue
@@ -41,6 +41,7 @@ public class LamportMutex extends dist.MyProcess implements Lock {
 			   }
 	    } else if (tag.equals("ack"))
 	    	numAcks++;
+		notifyAll();
 	}
        public static void main(String args[]) throws Exception {
                 Linker comm = new Linker(args);
