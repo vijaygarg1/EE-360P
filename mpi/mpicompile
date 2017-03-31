@@ -1,0 +1,2 @@
+mpicc -o hello hello.c
+# for c++ use mpicxx

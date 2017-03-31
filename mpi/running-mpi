@@ -1,0 +1,8 @@
+# for running on Stampede see te directions posted with the handout
+# the command used is ibrun
+
+#for local installation use
+#mpirun -n <number of processes>  <executable>
+#For example, 
+
+mpirun -n 4 hello
