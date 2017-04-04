@@ -1,2 +1,2 @@
-mpicc -o hello hello.c
+mpicc -o $1 $1.c
 # for c++ use mpicxx

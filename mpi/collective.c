@@ -1,5 +1,6 @@
 #include "mpi.h" 
 #include <math.h> 
+#include <stdio.h> 
  
 int main(argc,argv) 
 int argc; 
@@ -13,16 +14,11 @@ char *argv[];
   MPI_Init(&argc,&argv); 
   MPI_Comm_size(MPI_COMM_WORLD,&numprocs); 
   MPI_Comm_rank(MPI_COMM_WORLD,&myid); 
-  printf("My ID is %d", myid); 
+  //printf("My ID is %d", myid); 
 
-  while (!done) 
-    { 
-      if (myid == 0) { 
-          printf("Enter the number of intervals: (0 quits) "); 
-          scanf("%d",&n); 
-      } 
+       n = 64; // number of intervals;
+      /* int MPI_Bcast(void *buf, int count, MPI_Datatype datatype, int source, MPI_Comm comm) */
       MPI_Bcast(&n, 1, MPI_INT, 0, MPI_COMM_WORLD); 
-      if (n == 0) break; 
   
  
     h   = 1.0 / (double) n; 
@@ -35,6 +31,7 @@ char *argv[];
     
 
  
+    /* int MPI_Reduce(void *sendbuf, void *recvbuf, int count, MPI_Datatype datatype, MPI_Op op, int target, MPI_Comm comm) */
     MPI_Reduce(&mypi, &pi, 1, MPI_DOUBLE, MPI_SUM, 0, 
                 MPI_COMM_WORLD); 
     
@@ -43,6 +40,5 @@ char *argv[];
   if (myid == 0) 
         printf("pi is approximately %.16f, Error is %.16f\n", 
                pi, fabs(pi - PI25DT)); 
-  } 
   MPI_Finalize(); 
 } 
