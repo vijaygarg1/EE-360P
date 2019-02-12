@@ -6,7 +6,7 @@ class Cell {
     public synchronized void setValue(int i) {
         value = i;
     }
-    protected synchronized void doSwap(Cell x) {
+    protected void doSwap(Cell x) {
         int temp = getValue();
         setValue(x.getValue());
         x.setValue(temp);
@@ -14,10 +14,18 @@ class Cell {
     public void swap(Cell x) {
         if (this == x)
             return;
-        else if (System.identityHashCode(this)
+        if (System.identityHashCode(this)
                 < System.identityHashCode(x))
-            doSwap(x);
+            synchronized(this) {
+              synchronized(x) {
+                 doSwap(x);
+              }
+            }
         else
-            x.doSwap(this);
+              synchronized(x) {
+                synchronized(this) {
+                 x.doSwap(this);
+              }
+            }
     }
 }
