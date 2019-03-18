@@ -99,7 +99,7 @@ public class TextAnalyzer extends Configured implements Tool {
         System.exit(res);
     }
 
-    // You may define sub-classes here. Example:
+    // You may define sub-classes here.
     // public static class MyClass {
     //
     // }
