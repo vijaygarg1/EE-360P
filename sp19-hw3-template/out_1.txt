@@ -1,0 +1,9 @@
+Your request has been approved, 1 Mike "Ford" "Blue"
+Request Failed - We do not have this car
+Your request has been approved, 2 Lucy "Tesla" "Silver"
+2 "Tesla" "Silver"
+1 is returned
+"Ford" "Blue" 6
+"Lexus" "Red" 3
+"Toyota" "Yellow" 10
+"Tesla" "Silver" 15

@@ -1,0 +1,140 @@
+a mr 	1
+a and 	1
+a pleasant 	1
+a had 	1
+a manners 	1
+a easy 	1
+a countenance 	1
+a bingley 	1
+a unaffected 	1
+	
+and a 	1
+and mr 	2
+and pleasant 	1
+and was 	1
+and gentlemanlike 	1
+and had 	1
+and good 	1
+and easy 	1
+and bingley 	2
+and looking 	1
+and manners 	1
+and countenance 	1
+and unaffected 	1
+	
+bingley a 	1
+bingley mr 	2
+bingley pleasant 	1
+bingley was 	1
+bingley gentlemanlike 	1
+bingley had 	1
+bingley good 	1
+bingley easy 	1
+bingley and 	2
+bingley looking 	1
+bingley manners 	1
+bingley countenance 	1
+bingley unaffected 	1
+	
+countenance a 	1
+countenance mr 	1
+countenance pleasant 	1
+countenance and 	1
+countenance had 	1
+countenance manners 	1
+countenance easy 	1
+countenance bingley 	1
+countenance unaffected 	1
+	
+easy a 	1
+easy mr 	1
+easy and 	1
+easy pleasant 	1
+easy had 	1
+easy manners 	1
+easy countenance 	1
+easy bingley 	1
+easy unaffected 	1
+	
+gentlemanlike mr 	1
+gentlemanlike and 	1
+gentlemanlike was 	1
+gentlemanlike looking 	1
+gentlemanlike good 	1
+gentlemanlike bingley 	1
+	
+good mr 	1
+good and 	1
+good was 	1
+good gentlemanlike 	1
+good looking 	1
+good bingley 	1
+	
+had a 	1
+had mr 	1
+had and 	1
+had pleasant 	1
+had manners 	1
+had easy 	1
+had countenance 	1
+had bingley 	1
+had unaffected 	1
+	
+looking mr 	1
+looking and 	1
+looking was 	1
+looking gentlemanlike 	1
+looking good 	1
+looking bingley 	1
+	
+manners a 	1
+manners mr 	1
+manners pleasant 	1
+manners and 	1
+manners had 	1
+manners easy 	1
+manners bingley 	1
+manners countenance 	1
+manners unaffected 	1
+	
+mr a 	1
+mr pleasant 	1
+mr was 	1
+mr gentlemanlike 	1
+mr had 	1
+mr easy 	1
+mr good 	1
+mr bingley 	2
+mr and 	2
+mr looking 	1
+mr manners 	1
+mr countenance 	1
+mr unaffected 	1
+	
+pleasant a 	1
+pleasant mr 	1
+pleasant and 	1
+pleasant had 	1
+pleasant manners 	1
+pleasant easy 	1
+pleasant countenance 	1
+pleasant bingley 	1
+pleasant unaffected 	1
+	
+unaffected a 	1
+unaffected mr 	1
+unaffected pleasant 	1
+unaffected and 	1
+unaffected had 	1
+unaffected manners 	1
+unaffected easy 	1
+unaffected countenance 	1
+unaffected bingley 	1
+	
+was mr 	1
+was and 	1
+was gentlemanlike 	1
+was looking 	1
+was good 	1
+was bingley 	1
+	
